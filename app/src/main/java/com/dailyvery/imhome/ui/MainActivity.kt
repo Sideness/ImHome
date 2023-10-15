@@ -1,4 +1,4 @@
-package com.dailyvery.imhome
+package com.dailyvery.imhome.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
