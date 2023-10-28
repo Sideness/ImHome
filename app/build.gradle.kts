@@ -58,7 +58,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.koin)
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
