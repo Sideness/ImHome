@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.dailyvery.imhome"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.dailyvery.imhome"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 36
         versionName = "2.0.0"
 
@@ -48,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -66,7 +66,9 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.compose.navigation)
     implementation(libs.material3)
+    implementation(libs.maplibre)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
