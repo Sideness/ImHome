@@ -8,8 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.dailyvery.imhome.BuildConfig
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -25,7 +25,7 @@ fun rememberMapView(): MapView {
         MapView(context).apply {
             getMapAsync { mapboxMap ->
                 mapboxMap.apply {
-                    setStyle("https://demotiles.maplibre.org/style.json") {
+                    setStyle(MapStyleUrl.value) {
                         val locationComponentOptions =
                             LocationComponentOptions
                                 .builder(context)
@@ -67,4 +67,8 @@ fun rememberMapView(): MapView {
     }
 
     return map
+}
+
+object MapStyleUrl {
+    val value = "https://static.maptoolkit.net/rapidapi/styles/city.json?rapidapi-key=${BuildConfig.RAPID_API_KEY}"
 }
