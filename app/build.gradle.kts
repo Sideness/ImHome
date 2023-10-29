@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.dailyvery.imhome"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.dailyvery.imhome"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 36
         versionName = "2.0.0"
 
@@ -19,6 +19,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "RAPID_API_KEY", project.property("RAPID_API_KEY").toString())
     }
 
     buildTypes {
@@ -46,9 +48,10 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -58,7 +61,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.koin)
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -66,7 +69,9 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.compose.navigation)
     implementation(libs.material3)
+    implementation(libs.maplibre)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
