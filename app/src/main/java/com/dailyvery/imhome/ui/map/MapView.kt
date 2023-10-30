@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.dailyvery.imhome.BuildConfig
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -34,6 +35,7 @@ fun rememberMapView(): MapView {
                         val locationComponentActivationOptions =
                             LocationComponentActivationOptions.builder(context, it)
                                 .locationComponentOptions(locationComponentOptions)
+                                .useDefaultLocationEngine(true)
                                 .build()
                         mapboxMap.locationComponent.apply {
                             activateLocationComponent(locationComponentActivationOptions)

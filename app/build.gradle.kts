@@ -62,6 +62,7 @@ android {
 
 dependencies {
     implementation(libs.koin)
+    implementation(libs.koin.compose)
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -72,6 +73,7 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.material3)
     implementation(libs.maplibre)
+    implementation(libs.retrofit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
