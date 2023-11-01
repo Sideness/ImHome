@@ -1,14 +1,16 @@
 package com.dailyvery.imhome.ui.map
 
-import androidx.compose.foundation.layout.FlowRowScopeInstance.align
-import androidx.compose.foundation.layout.RowScopeInstance.align
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
+import com.dailyvery.imhome.R
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -16,18 +18,25 @@ import org.koin.androidx.compose.koinViewModel
  */
 @Composable
 fun Map(
-    viewModel: MapViewModel = koinViewModel()
+    viewModel: MapViewModel = koinViewModel(),
 ) {
-    val mapView = rememberMapView()
+    val mapView = rememberMapView(viewModel::saveMapInstance, viewModel::centerOnUserLocation)
 
-    AndroidView(
-        factory = { mapView },
+    Box(
         modifier = Modifier.fillMaxSize()
-    )
-    Button(
-        modifier = Modifier.wrapContentSize().align(Alignment.),
-        onClick = { viewModel.centerOnUserLocation() }
     ) {
-
+        AndroidView(
+            factory = { mapView },
+            modifier = Modifier.fillMaxSize()
+        )
+        Button(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.BottomEnd),
+            onClick = { viewModel.centerOnUserLocation() }
+        ) {
+            Text(text = stringResource(R.string.map_button_text_center))
+        }
     }
+
 }

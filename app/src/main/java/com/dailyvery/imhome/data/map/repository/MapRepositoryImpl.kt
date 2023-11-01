@@ -2,9 +2,9 @@ package com.dailyvery.imhome.data.map.repository
 
 import com.dailyvery.imhome.domain.map.model.MapIntent
 import com.dailyvery.imhome.domain.map.repository.MapRepository
+import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class MapRepositoryImpl: MapRepository {
 
@@ -16,11 +16,15 @@ class MapRepositoryImpl: MapRepository {
         }
     }
 
-    override fun setMapboxMapInstance(mapboxMap: MapboxMap) {
+    override fun setMapInstance(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
     }
 
     private fun centerOnUser() {
-        mapboxMap?.locationComponent?.zoomWhileTracking(10.0, 1000)
+        mapboxMap?.locationComponent?.lastKnownLocation?.let { location ->
+            val cameraPosition = CameraPosition.Builder().zoom(12.0).target(LatLng(location)).build()
+            mapboxMap?.cameraPosition = cameraPosition
+        }
+
     }
 }

@@ -10,21 +10,25 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.dailyvery.imhome.BuildConfig
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.maps.MapboxMap
 
 @SuppressLint("MissingPermission")
 @Composable
-fun rememberMapView(): MapView {
+fun rememberMapView(
+    setMapInstance: (MapboxMap) -> Unit,
+    centerOnUser: () -> Unit,
+): MapView {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
     val map = remember {
         Mapbox.getInstance(context)
         MapView(context).apply {
             getMapAsync { mapboxMap ->
+                setMapInstance(mapboxMap)
                 mapboxMap.apply {
                     setStyle(MapStyleUrl.value) {
                         val locationComponentOptions =
@@ -37,13 +41,13 @@ fun rememberMapView(): MapView {
                                 .locationComponentOptions(locationComponentOptions)
                                 .useDefaultLocationEngine(true)
                                 .build()
-                        mapboxMap.locationComponent.apply {
+                        this.locationComponent.apply {
                             activateLocationComponent(locationComponentActivationOptions)
                             isLocationComponentEnabled = true
                             cameraMode = CameraMode.TRACKING
                             forceLocationUpdate(lastKnownLocation)
                         }
-
+                        centerOnUser()
                     }
                 }
             }
@@ -72,5 +76,5 @@ fun rememberMapView(): MapView {
 }
 
 object MapStyleUrl {
-    val value = "https://static.maptoolkit.net/rapidapi/styles/city.json?rapidapi-key=${BuildConfig.RAPID_API_KEY}"
+    const val value = "https://static.maptoolkit.net/rapidapi/styles/city.json?rapidapi-key=${BuildConfig.RAPID_API_KEY}"
 }
