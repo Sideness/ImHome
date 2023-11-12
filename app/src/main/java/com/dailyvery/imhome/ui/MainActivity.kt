@@ -12,12 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.dailyvery.imhome.ui.map.Map
-import com.dailyvery.imhome.ui.messages.Messages
-import com.dailyvery.imhome.ui.settings.Settings
+import com.dailyvery.imhome.core.navigation.NavHost
 import com.dailyvery.imhome.ui.theme.ImHomeTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,12 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "map") {
-                        composable("map") { Map() }
-                        composable("messages") { Messages() }
-                        composable("settings") { Settings() }
-                    }
+                    NavHost()
                 }
             }
         }
