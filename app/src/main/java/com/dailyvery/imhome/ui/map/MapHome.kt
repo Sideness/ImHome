@@ -31,7 +31,7 @@ import org.koin.androidx.compose.koinViewModel
 fun MapHome(
     viewModel: MapViewModel = koinViewModel()
 ) {
-    val mapView = rememberMapView()
+    val mapView = rememberMapView(viewModel::saveMapInstance, viewModel::centerOnUserLocation)
 
     Box(
         modifier = Modifier.fillMaxSize()
