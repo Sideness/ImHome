@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ImHome</string>
+    <string name="center_on_user_button">Center on user</string>
+    <string name="map_button_text_center">Centrer</string>
 </resources>
